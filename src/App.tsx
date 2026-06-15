@@ -421,102 +421,105 @@ export default function App() {
         {gameState === "GARAGE" && (
           <div className="w-full h-full flex flex-col justify-between py-3 px-3.5 bg-slate-900 text-white overflow-hidden">
             
-            {/* ゲームタイトルロゴ */}
-            <div className="text-center pt-0.5">
-              <motion.div 
-                initial={{ scale: 0.8 }}
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="inline-block bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text font-black text-2xl tracking-wider pb-0.5 filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]"
-              >
-                🏁はしれ！スーパーカー🏁
-              </motion.div>
-              <p className="text-[10px] text-slate-300 -mt-0.5">パワーアップして てきの車をよけまくれ！</p>
-            </div>
+            {/* 上部固定コンテンツ */}
+            <div className="flex flex-col shrink-0 gap-1">
+              {/* ゲームタイトルロゴ */}
+              <div className="text-center pt-0.5">
+                <motion.div 
+                  initial={{ scale: 0.8 }}
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  className="inline-block bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text font-black text-2xl tracking-wider pb-0.5 filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]"
+                >
+                  🏁はしれ！スーパーカー🏁
+                </motion.div>
+                <p className="text-[10px] text-slate-300 -mt-0.5">パワーアップして てきの車をよけまくれ！</p>
+              </div>
 
-            {/* コインメーター */}
-            <motion.div 
-              id="coins-meter"
-              className="my-1.5 bg-slate-800/80 border-2 border-yellow-400 rounded-xl p-2 flex justify-between items-center shadow-[0_0_10px_rgba(250,204,21,0.2)]"
-              whileHover={{ scale: 1.02 }}
-            >
-              <div className="flex items-center gap-2">
-                <div className="text-xl animate-bounce">🪙</div>
-                <div>
-                  <div className="text-[10px] text-yellow-400 font-bold">しょじコイン</div>
-                  <div className="text-xl font-black font-mono tracking-wide text-yellow-300">
-                    {coins} <span className="text-xs">コイン</span>
+              {/* コインメーター */}
+              <motion.div 
+                id="coins-meter"
+                className="my-1.5 bg-slate-800/80 border-2 border-yellow-400 rounded-xl p-2 flex justify-between items-center shadow-[0_0_10px_rgba(250,204,21,0.2)]"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="flex items-center gap-2">
+                  <div className="text-xl animate-bounce">🪙</div>
+                  <div>
+                    <div className="text-[10px] text-yellow-400 font-bold">しょじコイン</div>
+                    <div className="text-xl font-black font-mono tracking-wide text-yellow-300">
+                      {coins} <span className="text-xs">コイン</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex gap-1">
+                  <span className="text-[10px] py-0.5 px-2 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-500/30">
+                    しょうがく2ねんせい むけ
+                  </span>
+                </div>
+              </motion.div>
+
+              {/* マイカーのビジュアル表示 */}
+              <div className="relative flex justify-center items-center py-3 bg-gradient-to-b from-indigo-900/40 to-slate-800/80 rounded-2xl border-2 border-indigo-500/30 overflow-hidden min-h-[105px] shadow-inner">
+                <div className="absolute top-1.5 left-2.5 text-[10px] text-indigo-300 font-bold flex items-center gap-1">
+                  <Sparkles className="w-3 h-3 text-yellow-400 animate-spin" /> いまのってりゅ！
+                </div>
+                <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.25)_0%,transparent_70%)] animate-pulse" />
+                
+                <div className="relative z-10 flex flex-col items-center">
+                  {/* くるま絵文字（少し小さく表示） */}
+                  <motion.div 
+                    id="selected-car-visual"
+                    className="text-5xl filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]"
+                    animate={{ 
+                      y: [-3, 3, -3],
+                      rotate: [-1, 1, -1] 
+                    }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    {selectedCar}
+                  </motion.div>
+                  <div className="mt-1.5 font-bold text-xs text-yellow-200 bg-black/40 px-2.5 py-0.5 rounded-full border border-yellow-200/20">
+                    {CAR_SHOP.find(c => c.emoji === selectedCar)?.name || "スペシャルカー"}
+                  </div>
+                  <div className="text-[10px] text-slate-300 mt-0.5">
+                    {CAR_SHOP.find(c => c.emoji === selectedCar)?.specbonus || "スピードバツグン！"}
                   </div>
                 </div>
               </div>
-              <div className="flex gap-1">
-                <span className="text-[10px] py-0.5 px-2 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-500/30">
-                  しょうがく2ねんせい むけ
-                </span>
-              </div>
-            </motion.div>
 
-            {/* マイカーのビジュアル表示 */}
-            <div className="relative flex justify-center items-center py-3 bg-gradient-to-b from-indigo-900/40 to-slate-800/80 rounded-2xl border-2 border-indigo-500/30 overflow-hidden min-h-[105px] shadow-inner">
-              <div className="absolute top-1.5 left-2.5 text-[10px] text-indigo-300 font-bold flex items-center gap-1">
-                <Sparkles className="w-3 h-3 text-yellow-400 animate-spin" /> いまのってりゅ！
-              </div>
-              <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.25)_0%,transparent_70%)] animate-pulse" />
-              
-              <div className="relative z-10 flex flex-col items-center">
-                {/* くるま絵文字（少し小さく表示） */}
-                <motion.div 
-                  id="selected-car-visual"
-                  className="text-5xl filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]"
-                  animate={{ 
-                    y: [-3, 3, -3],
-                    rotate: [-1, 1, -1] 
-                  }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              {/* メインタブ切り替え */}
+              <div className="flex gap-2 my-1.5">
+                <button
+                  id="tab-btn-upgrade"
+                  onClick={() => { setActiveTab("UPGRADE"); sfx.playCoin(); }}
+                  className={`flex-1 py-1.5 px-2.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1 border-2 transition-all cursor-pointer ${
+                    activeTab === "UPGRADE"
+                      ? "bg-indigo-600 text-white border-indigo-400 shadow-lg shadow-indigo-600/30 scale-102"
+                      : "bg-slate-800 text-slate-300 border-transparent hover:bg-slate-700"
+                  }`}
                 >
-                  {selectedCar}
-                </motion.div>
-                <div className="mt-1.5 font-bold text-xs text-yellow-200 bg-black/40 px-2.5 py-0.5 rounded-full border border-yellow-200/20">
-                  {CAR_SHOP.find(c => c.emoji === selectedCar)?.name || "スペシャルカー"}
-                </div>
-                <div className="text-[10px] text-slate-300 mt-0.5">
-                  {CAR_SHOP.find(c => c.emoji === selectedCar)?.specbonus || "スピードバツグン！"}
-                </div>
+                  <Wrench className="w-3.5 h-3.5 text-indigo-300" /> かいぞう＆強化
+                </button>
+                <button
+                  id="tab-btn-garage"
+                  onClick={() => { setActiveTab("GARAGE_SELECT"); sfx.playCoin(); }}
+                  className={`flex-1 py-1.5 px-2.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1 border-2 transition-all cursor-pointer ${
+                    activeTab === "GARAGE_SELECT"
+                      ? "bg-amber-600 text-white border-amber-400 shadow-lg shadow-amber-600/30 scale-102"
+                      : "bg-slate-800 text-slate-300 border-transparent hover:bg-slate-700"
+                  }`}
+                >
+                  <Trophy className="w-3.5 h-3.5 text-yellow-300" /> きせかえ車やさん
+                </button>
               </div>
-            </div>
-
-            {/* メインタブ切り替え */}
-            <div className="flex gap-2 my-1.5">
-              <button
-                id="tab-btn-upgrade"
-                onClick={() => { setActiveTab("UPGRADE"); sfx.playCoin(); }}
-                className={`flex-1 py-1.5 px-2.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1 border-2 transition-all cursor-pointer ${
-                  activeTab === "UPGRADE"
-                    ? "bg-indigo-600 text-white border-indigo-400 shadow-lg shadow-indigo-600/30 scale-102"
-                    : "bg-slate-800 text-slate-300 border-transparent hover:bg-slate-700"
-                }`}
-              >
-                <Wrench className="w-3.5 h-3.5 text-indigo-300" /> かいぞう＆強化
-              </button>
-              <button
-                id="tab-btn-garage"
-                onClick={() => { setActiveTab("GARAGE_SELECT"); sfx.playCoin(); }}
-                className={`flex-1 py-1.5 px-2.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1 border-2 transition-all cursor-pointer ${
-                  activeTab === "GARAGE_SELECT"
-                    ? "bg-amber-600 text-white border-amber-400 shadow-lg shadow-amber-600/30 scale-102"
-                    : "bg-slate-800 text-slate-300 border-transparent hover:bg-slate-700"
-                }`}
-              >
-                <Trophy className="w-3.5 h-3.5 text-yellow-300" /> きせかえ車やさん
-              </button>
             </div>
 
             {/* タブコンテンツ */}
-            <div className="flex-1 min-h-[185px]">
+            <div className="flex-1 min-h-0 overflow-y-auto pr-1 my-1">
               
               {/* 【強化タブ】 */}
               {activeTab === "UPGRADE" && (
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 pb-2">
                   
                   {/* リスト1: エンジン改造 */}
                   <div className="bg-slate-800/90 rounded-xl p-2 border border-slate-700 flex justify-between items-center shadow-md">
@@ -657,7 +660,7 @@ export default function App() {
 
               {/* 【きせかえ車やさんタブ】 */}
               {activeTab === "GARAGE_SELECT" && (
-                <div className="grid grid-cols-2 gap-2 h-[185px] overflow-y-auto pr-1">
+                <div className="grid grid-cols-2 gap-2 pb-2">
                   {CAR_SHOP.map((car) => {
                     const isOwned = ownedCars.includes(car.emoji);
                     const isSelected = selectedCar === car.emoji;
@@ -716,7 +719,7 @@ export default function App() {
             </div>
 
             {/* 「レースにで発車！」ボタン */}
-            <div className="pt-1">
+            <div className="pt-1 shrink-0">
               <motion.button
                 id="btn-race-start"
                 onClick={() => {
@@ -1665,7 +1668,7 @@ function GameCanvas({ levels, selectedCar, onFinish, isMuted }: GameCanvasProps)
       </div>
 
       {/* ================= メインの2D描画Canvas ================= */}
-      <div className="flex-1 w-full bg-slate-800 relative flex items-center justify-center">
+      <div className="flex-1 min-h-0 w-full bg-slate-800 relative flex items-center justify-center">
         
         <canvas
           ref={canvasRef}
