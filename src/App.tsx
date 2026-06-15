@@ -451,7 +451,10 @@ export default function App() {
                     </div>
                   </div>
                 </div>
-                <div className="flex gap-1">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[9px] py-0.5 px-1.5 rounded bg-slate-700 text-slate-300 font-mono">
+                    v1.2.0
+                  </span>
                   <span className="text-[10px] py-0.5 px-2 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-500/30">
                     しょうがく2ねんせい むけ
                   </span>
