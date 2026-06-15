@@ -1,0 +1,6 @@
+{
+  "name": "ドキドキ！くるまレース＆パワーアップ！",
+  "description": "しょうがく2ねんせいむけの、めちゃくちゃたのしいくるまのレース＆パワーアップゲーム！コインをあつめて、エンジンやタイヤをパワーアップしよう！",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
