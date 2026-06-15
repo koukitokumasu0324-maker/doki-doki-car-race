@@ -419,127 +419,127 @@ export default function App() {
         {/* 1. ガレージ画面（ホーム＆パワーアップ・きせかえ） */}
         {/* ========================================================= */}
         {gameState === "GARAGE" && (
-          <div className="w-full h-full flex flex-col justify-between py-6 px-4 bg-slate-900 text-white overflow-y-auto">
+          <div className="w-full h-full flex flex-col justify-between py-3 px-3.5 bg-slate-900 text-white overflow-hidden">
             
             {/* ゲームタイトルロゴ */}
-            <div className="text-center pt-2">
+            <div className="text-center pt-0.5">
               <motion.div 
                 initial={{ scale: 0.8 }}
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="inline-block bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text font-black text-3xl tracking-wider pb-1 filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]"
+                className="inline-block bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text font-black text-2xl tracking-wider pb-0.5 filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]"
               >
                 🏁はしれ！スーパーカー🏁
               </motion.div>
-              <p className="text-xs text-slate-300">パワーアップして てきの車をよけまくれ！</p>
+              <p className="text-[10px] text-slate-300 -mt-0.5">パワーアップして てきの車をよけまくれ！</p>
             </div>
 
             {/* コインメーター */}
             <motion.div 
               id="coins-meter"
-              className="my-3 bg-slate-800/80 border-2 border-yellow-400 rounded-2xl p-3 flex justify-between items-center shadow-[0_0_10px_rgba(250,204,21,0.2)]"
+              className="my-1.5 bg-slate-800/80 border-2 border-yellow-400 rounded-xl p-2 flex justify-between items-center shadow-[0_0_10px_rgba(250,204,21,0.2)]"
               whileHover={{ scale: 1.02 }}
             >
-              <div className="flex items-center gap-3">
-                <div className="text-2xl animate-bounce">🪙</div>
+              <div className="flex items-center gap-2">
+                <div className="text-xl animate-bounce">🪙</div>
                 <div>
-                  <div className="text-xs text-yellow-400 font-bold">しょじコイン</div>
-                  <div className="text-2xl font-black font-mono tracking-wide text-yellow-300">
-                    {coins} <span className="text-sm">コイン</span>
+                  <div className="text-[10px] text-yellow-400 font-bold">しょじコイン</div>
+                  <div className="text-xl font-black font-mono tracking-wide text-yellow-300">
+                    {coins} <span className="text-xs">コイン</span>
                   </div>
                 </div>
               </div>
               <div className="flex gap-1">
-                <span className="text-xs py-1 px-2.5 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-500/30">
+                <span className="text-[10px] py-0.5 px-2 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-500/30">
                   しょうがく2ねんせい むけ
                 </span>
               </div>
             </motion.div>
 
             {/* マイカーのビジュアル表示 */}
-            <div className="relative flex justify-center items-center py-6 bg-gradient-to-b from-indigo-900/40 to-slate-800/80 rounded-2xl border-2 border-indigo-500/30 overflow-hidden min-h-[140px] shadow-inner">
-              <div className="absolute top-2 left-3 text-xs text-indigo-300 font-bold flex items-center gap-1">
-                <Sparkles className="w-3.5 h-3.5 text-yellow-400 animate-spin" /> いまのってりゅ！
+            <div className="relative flex justify-center items-center py-3 bg-gradient-to-b from-indigo-900/40 to-slate-800/80 rounded-2xl border-2 border-indigo-500/30 overflow-hidden min-h-[105px] shadow-inner">
+              <div className="absolute top-1.5 left-2.5 text-[10px] text-indigo-300 font-bold flex items-center gap-1">
+                <Sparkles className="w-3 h-3 text-yellow-400 animate-spin" /> いまのってりゅ！
               </div>
               <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.25)_0%,transparent_70%)] animate-pulse" />
               
               <div className="relative z-10 flex flex-col items-center">
-                {/* くるま絵文字（大きく表示） */}
+                {/* くるま絵文字（少し小さく表示） */}
                 <motion.div 
                   id="selected-car-visual"
-                  className="text-7xl filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.6)]"
+                  className="text-5xl filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]"
                   animate={{ 
-                    y: [-4, 4, -4],
+                    y: [-3, 3, -3],
                     rotate: [-1, 1, -1] 
                   }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                 >
                   {selectedCar}
                 </motion.div>
-                <div className="mt-2 font-bold text-sm text-yellow-200 bg-black/40 px-3 py-1 rounded-full border border-yellow-200/20">
+                <div className="mt-1.5 font-bold text-xs text-yellow-200 bg-black/40 px-2.5 py-0.5 rounded-full border border-yellow-200/20">
                   {CAR_SHOP.find(c => c.emoji === selectedCar)?.name || "スペシャルカー"}
                 </div>
-                <div className="text-xs text-slate-300 mt-1">
+                <div className="text-[10px] text-slate-300 mt-0.5">
                   {CAR_SHOP.find(c => c.emoji === selectedCar)?.specbonus || "スピードバツグン！"}
                 </div>
               </div>
             </div>
 
             {/* メインタブ切り替え */}
-            <div className="flex gap-2 my-3">
+            <div className="flex gap-2 my-1.5">
               <button
                 id="tab-btn-upgrade"
                 onClick={() => { setActiveTab("UPGRADE"); sfx.playCoin(); }}
-                className={`flex-1 py-2.5 px-3 rounded-xl font-bold text-sm flex items-center justify-center gap-1 border-2 transition-all cursor-pointer ${
+                className={`flex-1 py-1.5 px-2.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1 border-2 transition-all cursor-pointer ${
                   activeTab === "UPGRADE"
                     ? "bg-indigo-600 text-white border-indigo-400 shadow-lg shadow-indigo-600/30 scale-102"
                     : "bg-slate-800 text-slate-300 border-transparent hover:bg-slate-700"
                 }`}
               >
-                <Wrench className="w-4 h-4 text-indigo-300" /> かいぞう＆強化
+                <Wrench className="w-3.5 h-3.5 text-indigo-300" /> かいぞう＆強化
               </button>
               <button
                 id="tab-btn-garage"
                 onClick={() => { setActiveTab("GARAGE_SELECT"); sfx.playCoin(); }}
-                className={`flex-1 py-2.5 px-3 rounded-xl font-bold text-sm flex items-center justify-center gap-1 border-2 transition-all cursor-pointer ${
+                className={`flex-1 py-1.5 px-2.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1 border-2 transition-all cursor-pointer ${
                   activeTab === "GARAGE_SELECT"
                     ? "bg-amber-600 text-white border-amber-400 shadow-lg shadow-amber-600/30 scale-102"
                     : "bg-slate-800 text-slate-300 border-transparent hover:bg-slate-700"
                 }`}
               >
-                <Trophy className="w-4 h-4 text-yellow-300" /> きせかえ車やさん
+                <Trophy className="w-3.5 h-3.5 text-yellow-300" /> きせかえ車やさん
               </button>
             </div>
 
             {/* タブコンテンツ */}
-            <div className="flex-1 min-h-[220px]">
+            <div className="flex-1 min-h-[185px]">
               
               {/* 【強化タブ】 */}
               {activeTab === "UPGRADE" && (
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-2">
                   
                   {/* リスト1: エンジン改造 */}
-                  <div className="bg-slate-800/90 rounded-2xl p-3 border border-slate-700 flex justify-between items-center shadow-md">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2.5 rounded-xl bg-orange-500/20 text-orange-400 text-2xl font-bold">
+                  <div className="bg-slate-800/90 rounded-xl p-2 border border-slate-700 flex justify-between items-center shadow-md">
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-lg bg-orange-500/20 text-orange-400 text-xl font-bold">
                         🚀
                       </div>
                       <div>
-                        <div className="font-bold text-sm text-slate-100 flex items-center gap-1">
+                        <div className="font-bold text-xs text-slate-100 flex items-center gap-1">
                           エンジンのかいぞう 
-                          <span className="text-xs text-orange-400 bg-orange-400/10 px-1.5 py-0.5 rounded ml-1 font-mono">
+                          <span className="text-[10px] text-orange-400 bg-orange-400/10 px-1 py-0.5 rounded ml-1 font-mono">
                             LV.{levels.engine}
                           </span>
                         </div>
-                        <div className="text-xs text-slate-300 -mt-0.5">さいこうスピードが UPするぞ！</div>
-                        <div className="text-xs text-orange-300 font-bold mt-1">
+                        <div className="text-[10px] text-slate-300 -mt-0.5">さいこうスピードが UPするぞ！</div>
+                        <div className="text-[10px] text-orange-300 font-bold mt-0.5">
                           スピード: {Math.round(100 + (levels.engine - 1) * 12)}%
                         </div>
                       </div>
                     </div>
                     <div>
                       {levels.engine >= 10 ? (
-                        <div className="text-xs font-bold text-green-400 bg-green-500/10 py-2 px-3 rounded-xl border border-green-500/20 text-center">
+                        <div className="text-[10px] font-bold text-green-400 bg-green-500/10 py-1.5 px-2 rounded-lg border border-green-500/20 text-center">
                           さいきょう!!
                         </div>
                       ) : (
@@ -547,7 +547,7 @@ export default function App() {
                           id="btn-upgrade-engine"
                           onClick={() => handleUpgrade("engine")}
                           disabled={coins < getCost("engine", levels.engine)}
-                          className={`py-2 px-3.5 rounded-xl font-black text-xs min-w-[75px] text-center border-2 shadow-md flex flex-col items-center transition-all cursor-pointer ${
+                          className={`py-1.5 px-2.5 rounded-lg font-black text-[10px] min-w-[70px] text-center border-2 shadow-md flex flex-col items-center transition-all cursor-pointer ${
                             coins >= getCost("engine", levels.engine)
                               ? "bg-gradient-to-b from-orange-400 to-orange-600 text-white border-orange-300 active:scale-95"
                               : "bg-slate-700 text-slate-400 border-slate-600 cursor-not-allowed opacity-60"
@@ -563,27 +563,27 @@ export default function App() {
                   </div>
 
                   {/* リスト2: タイヤ改造 */}
-                  <div className="bg-slate-800/90 rounded-2xl p-3 border border-slate-700 flex justify-between items-center shadow-md">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2.5 rounded-xl bg-cyan-500/20 text-cyan-400 text-2xl font-bold">
+                  <div className="bg-slate-800/90 rounded-xl p-2 border border-slate-700 flex justify-between items-center shadow-md">
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-lg bg-cyan-500/20 text-cyan-400 text-xl font-bold">
                         🏎️
                       </div>
                       <div>
-                        <div className="font-bold text-sm text-slate-100 flex items-center gap-1">
+                        <div className="font-bold text-xs text-slate-100 flex items-center gap-1">
                           タイヤのかいぞう 
-                          <span className="text-xs text-cyan-400 bg-cyan-400/10 px-1.5 py-0.5 rounded ml-1 font-mono">
+                          <span className="text-[10px] text-cyan-400 bg-cyan-400/10 px-1 py-0.5 rounded ml-1 font-mono">
                             LV.{levels.tire}
                           </span>
                         </div>
-                        <div className="text-xs text-slate-300 -mt-0.5">左右によけやすくなる！</div>
-                        <div className="text-xs text-cyan-300 font-bold mt-1">
-                          ハンドルのかるさ: {Math.round(100 + (levels.tire - 1) * 15)}%
+                        <div className="text-[10px] text-slate-300 -mt-0.5">左右によけやすくなる！</div>
+                        <div className="text-[10px] text-cyan-300 font-bold mt-0.5">
+                          ハンドルかるさ: {Math.round(100 + (levels.tire - 1) * 15)}%
                         </div>
                       </div>
                     </div>
                     <div>
                       {levels.tire >= 10 ? (
-                        <div className="text-xs font-bold text-green-400 bg-green-500/10 py-2 px-3 rounded-xl border border-green-500/20 text-center">
+                        <div className="text-[10px] font-bold text-green-400 bg-green-500/10 py-1.5 px-2 rounded-lg border border-green-500/20 text-center">
                           さいきょう!!
                         </div>
                       ) : (
@@ -591,7 +591,7 @@ export default function App() {
                           id="btn-upgrade-tire"
                           onClick={() => handleUpgrade("tire")}
                           disabled={coins < getCost("tire", levels.tire)}
-                          className={`py-2 px-3.5 rounded-xl font-black text-xs min-w-[75px] text-center border-2 shadow-md flex flex-col items-center transition-all cursor-pointer ${
+                          className={`py-1.5 px-2.5 rounded-lg font-black text-[10px] min-w-[70px] text-center border-2 shadow-md flex flex-col items-center transition-all cursor-pointer ${
                             coins >= getCost("tire", levels.tire)
                               ? "bg-gradient-to-b from-cyan-400 to-cyan-600 text-white border-cyan-300 active:scale-95"
                               : "bg-slate-700 text-slate-400 border-slate-600 cursor-not-allowed opacity-60"
@@ -607,29 +607,29 @@ export default function App() {
                   </div>
 
                   {/* リスト3: ボディ（ライフ）改造 */}
-                  <div className="bg-slate-800/90 rounded-2xl p-3 border border-slate-700 flex justify-between items-center shadow-md">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2.5 rounded-xl bg-rose-500/20 text-rose-400 text-2xl font-bold">
+                  <div className="bg-slate-800/90 rounded-xl p-2 border border-slate-700 flex justify-between items-center shadow-md">
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-lg bg-rose-500/20 text-rose-400 text-xl font-bold">
                         💖
                       </div>
                       <div>
-                        <div className="font-bold text-sm text-slate-100 flex items-center gap-1">
+                        <div className="font-bold text-xs text-slate-100 flex items-center gap-1">
                           ボディのかいぞう 
-                          <span className="text-xs text-rose-400 bg-rose-400/10 px-1.5 py-0.5 rounded ml-1 font-mono">
+                          <span className="text-[10px] text-rose-400 bg-rose-400/10 px-1 py-0.5 rounded ml-1 font-mono">
                             LV.{levels.body}
                           </span>
                         </div>
-                        <div className="text-xs text-slate-300 -mt-0.5">ぶつかってもだいじょうぶなライフ！</div>
-                        <div className="text-xs text-rose-300 font-bold mt-1 flex items-center gap-0.5">
+                        <div className="text-[10px] text-slate-300 -mt-0.5">ぶつかってもライフでセーフ！</div>
+                        <div className="text-[10px] text-rose-300 font-bold mt-0.5 flex items-center gap-0.5">
                           ライフ: {Array.from({ length: Math.min(5, levels.body) }).map((_, i) => (
-                            <Heart key={i} className="w-3.5 h-3.5 text-rose-400 fill-rose-500" />
+                            <Heart key={i} className="w-3 h-3 text-rose-400 fill-rose-500" />
                           ))}
                         </div>
                       </div>
                     </div>
                     <div>
                       {levels.body >= 5 ? (
-                        <div className="text-xs font-bold text-green-400 bg-green-500/10 py-2 px-3 rounded-xl border border-green-500/20 text-center">
+                        <div className="text-[10px] font-bold text-green-400 bg-green-500/10 py-1.5 px-2 rounded-lg border border-green-500/20 text-center">
                           さいきょう!!
                         </div>
                       ) : (
@@ -637,7 +637,7 @@ export default function App() {
                           id="btn-upgrade-body"
                           onClick={() => handleUpgrade("body")}
                           disabled={coins < getCost("body", levels.body)}
-                          className={`py-2 px-3.5 rounded-xl font-black text-xs min-w-[75px] text-center border-2 shadow-md flex flex-col items-center transition-all cursor-pointer ${
+                          className={`py-1.5 px-2.5 rounded-lg font-black text-[10px] min-w-[70px] text-center border-2 shadow-md flex flex-col items-center transition-all cursor-pointer ${
                             coins >= getCost("body", levels.body)
                               ? "bg-gradient-to-b from-rose-400 to-rose-600 text-white border-rose-300 active:scale-95"
                               : "bg-slate-700 text-slate-400 border-slate-600 cursor-not-allowed opacity-60"
@@ -657,7 +657,7 @@ export default function App() {
 
               {/* 【きせかえ車やさんタブ】 */}
               {activeTab === "GARAGE_SELECT" && (
-                <div className="grid grid-cols-2 gap-2 h-[240px] overflow-y-auto pr-1">
+                <div className="grid grid-cols-2 gap-2 h-[185px] overflow-y-auto pr-1">
                   {CAR_SHOP.map((car) => {
                     const isOwned = ownedCars.includes(car.emoji);
                     const isSelected = selectedCar === car.emoji;
@@ -668,7 +668,7 @@ export default function App() {
                         id={`btn-car-shop-${car.id}`}
                         key={car.id}
                         onClick={() => handleBuyCar(car)}
-                        className={`p-2.5 rounded-2xl flex flex-col items-center justify-between border-2 transition-all text-center relative cursor-pointer ${
+                        className={`p-1.5 rounded-xl flex flex-col items-center justify-between border-2 transition-all text-center relative cursor-pointer ${
                           isSelected 
                             ? "bg-amber-500/20 border-amber-400 text-white scale-102"
                             : isOwned
@@ -677,17 +677,17 @@ export default function App() {
                         }`}
                       >
                         {/* えもじ */}
-                        <div className="text-4xl my-1 filter drop-shadow-md">{car.emoji}</div>
+                        <div className="text-3xl my-0.5 filter drop-shadow-md">{car.emoji}</div>
                         
                         {/* くるまの名前 */}
-                        <div className="font-bold text-xs text-yellow-100 truncate w-full">{car.name}</div>
+                        <div className="font-bold text-[10px] text-yellow-100 truncate w-full">{car.name}</div>
                         
                         {/* ステータス */}
-                        <div className="mt-1 w-full bg-slate-900/60 rounded py-1 px-1 text-[10px] text-slate-300 truncate">
+                        <div className="mt-0.5 w-full bg-slate-900/60 rounded py-0.5 px-0.5 text-[9px] text-slate-300 truncate">
                           {isOwned ? (
                             isSelected ? (
                               <span className="text-amber-300 font-bold flex items-center justify-center gap-0.5">
-                                <Check className="w-3 h-3 text-amber-400" /> いまの車
+                                <Check className="w-2.5 h-2.5 text-amber-400" /> のり中
                               </span>
                             ) : (
                               <span className="text-green-400">のる！</span>
@@ -701,10 +701,10 @@ export default function App() {
 
                         {/* ロック状態の鍵マーク */}
                         {!isOwned && !canBuy && (
-                          <div className="absolute top-1 right-2 text-xs">🔒</div>
+                          <div className="absolute top-0.5 right-1.5 text-[10px]">🔒</div>
                         )}
                         {!isOwned && canBuy && (
-                          <div className="absolute top-1 right-2 text-[10px] bg-red-500 text-white rounded-full px-1 font-bold animate-bounce">
+                          <div className="absolute top-0.5 right-1.5 text-[9px] bg-red-500 text-white rounded-full px-1 font-bold animate-bounce">
                             OK!
                           </div>
                         )}
@@ -716,21 +716,21 @@ export default function App() {
             </div>
 
             {/* 「レースにで発車！」ボタン */}
-            <div className="pt-2">
+            <div className="pt-1">
               <motion.button
                 id="btn-race-start"
                 onClick={() => {
                   sfx.init();
                   setGameState("RACING");
                 }}
-                className="w-full py-4.5 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 text-white text-xl font-black rounded-2xl border-b-6 border-red-700 shadow-xl active:translate-y-1 active:border-b-2 hover:brightness-105 transition-all flex items-center justify-center gap-2 cursor-pointer cursor-pulse"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="w-full py-3 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 text-white text-base font-black rounded-xl border-b-4 border-red-700 shadow-lg active:translate-y-0.5 active:border-b-2 hover:brightness-105 transition-all flex items-center justify-center gap-1.5 cursor-pointer cursor-pulse"
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
               >
-                <Play className="w-6 h-6 fill-white" /> レースにしゅっぱつ！🚀
+                <Play className="w-5 h-5 fill-white" /> レースにしゅっぱつ！🚀
               </motion.button>
-              <div className="text-center text-[10px] text-slate-400 mt-2">
-                スマホは「ひだり半分・みぎ半分」をタッチ！パソコンは「←」「→」キーでうごくよ！
+              <div className="text-center text-[9px] text-slate-400 mt-1">
+                スマホは画面下の「👈」「👉」をタッチ！パソコンは「←」「→」キーでうごくよ！
               </div>
             </div>
 
@@ -1728,11 +1728,10 @@ function GameCanvas({ levels, selectedCar, onFinish, isMuted }: GameCanvasProps)
         
         {/* 左タッチエリア */}
         <div
-          onMouseDown={() => handleTouchStart("left")}
-          onMouseUp={handleTouchEnd}
-          onMouseLeave={handleTouchEnd}
-          onTouchStart={(e) => { e.preventDefault(); handleTouchStart("left"); }}
-          onTouchEnd={(e) => { e.preventDefault(); handleTouchEnd(); }}
+          onPointerDown={(e) => { e.preventDefault(); handleTouchStart("left"); }}
+          onPointerUp={(e) => { e.preventDefault(); handleTouchEnd(); }}
+          onPointerLeave={(e) => { e.preventDefault(); handleTouchEnd(); }}
+          onPointerCancel={(e) => { e.preventDefault(); handleTouchEnd(); }}
           className="flex-1 bg-slate-900 border-r border-slate-800 active:bg-slate-800 flex flex-col justify-center items-center transition-colors cursor-pointer"
         >
           <div className="text-4xl text-slate-400 font-bold animate-pulse">👈</div>
@@ -1752,11 +1751,10 @@ function GameCanvas({ levels, selectedCar, onFinish, isMuted }: GameCanvasProps)
 
         {/* 右タッチエリア */}
         <div
-          onMouseDown={() => handleTouchStart("right")}
-          onMouseUp={handleTouchEnd}
-          onMouseLeave={handleTouchEnd}
-          onTouchStart={(e) => { e.preventDefault(); handleTouchStart("right"); }}
-          onTouchEnd={(e) => { e.preventDefault(); handleTouchEnd(); }}
+          onPointerDown={(e) => { e.preventDefault(); handleTouchStart("right"); }}
+          onPointerUp={(e) => { e.preventDefault(); handleTouchEnd(); }}
+          onPointerLeave={(e) => { e.preventDefault(); handleTouchEnd(); }}
+          onPointerCancel={(e) => { e.preventDefault(); handleTouchEnd(); }}
           className="flex-1 bg-slate-900 active:bg-slate-800 flex flex-col justify-center items-center transition-colors cursor-pointer"
         >
           <div className="text-4xl text-slate-400 font-bold animate-pulse">👉</div>
