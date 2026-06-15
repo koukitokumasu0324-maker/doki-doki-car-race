@@ -1637,10 +1637,10 @@ function GameCanvas({ levels, selectedCar, onFinish, isMuted }: GameCanvasProps)
     >
       
       {/* ================= ヘッダー：ライフ表示・進捗メーター ================= */}
-      <div className="absolute top-0 inset-x-0 bg-slate-950/80 p-2 text-white flex justify-between items-center border-b border-white/10 z-10">
+      <div className="absolute top-0 inset-x-0 bg-slate-950/80 py-1.5 px-2 text-white flex justify-between items-center border-b border-white/10 z-10">
         
         {/* 🧡 ライフメーター */}
-        <div className="flex items-center gap-1.5 bg-slate-900/90 py-1.5 px-3 rounded-full border border-rose-500/30">
+        <div className="flex items-center gap-1.5 bg-slate-900/90 py-1 px-2.5 rounded-full border border-rose-500/30">
           <span className="text-[10px] text-slate-300 font-bold mr-1">ライフ:</span>
           {Array.from({ length: MAX_LIFE }).map((_, i) => (
             <motion.div
@@ -1650,7 +1650,7 @@ function GameCanvas({ levels, selectedCar, onFinish, isMuted }: GameCanvasProps)
               transition={{ duration: 0.2 }}
             >
               <Heart 
-                className={`w-4.5 h-4.5 ${
+                className={`w-4 h-4 ${
                   i < currentLife 
                     ? "text-rose-500 fill-rose-500 filter drop-shadow-[0_0_2px_rgba(244,63,94,0.6)]" 
                     : "text-slate-600 fill-slate-800"
@@ -1661,9 +1661,9 @@ function GameCanvas({ levels, selectedCar, onFinish, isMuted }: GameCanvasProps)
         </div>
 
         {/* 💰 みちでひろったコイン */}
-        <div className="flex items-center gap-1.5 bg-slate-900/90 py-1.5 px-3 rounded-full border border-yellow-500/30 font-black">
+        <div className="flex items-center gap-1.5 bg-slate-900/90 py-1 px-2.5 rounded-full border border-yellow-500/30 font-black">
           <span className="text-yellow-400">🪙</span>
-          <span className="text-sm font-mono text-yellow-300">
+          <span className="text-xs font-mono text-yellow-300">
             {coinsCollected}
           </span>
         </div>
@@ -1713,9 +1713,9 @@ function GameCanvas({ levels, selectedCar, onFinish, isMuted }: GameCanvasProps)
       </div>
 
       {/* ================= 画面うえの 進捗メーター (ゴールまであとどれくらい？) ================= */}
-      <div className="bg-slate-950/90 py-2.5 px-4 flex items-center gap-3 border-t border-white/10 relative z-10">
+      <div className="bg-slate-950/90 py-1.5 px-3 flex items-center gap-3 border-t border-white/10 relative z-10">
         <span className="text-xs text-slate-400 font-bold whitespace-nowrap">スタート</span>
-        <div className="flex-1 h-3.5 bg-slate-800 rounded-full overflow-hidden border border-slate-700 p-0.5 flex items-center">
+        <div className="flex-1 h-2.5 bg-slate-800 rounded-full overflow-hidden border border-slate-700 p-0.5 flex items-center">
           <motion.div 
             ref={progressBarRef}
             className="h-full bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 rounded-full"
@@ -1730,7 +1730,7 @@ function GameCanvas({ levels, selectedCar, onFinish, isMuted }: GameCanvasProps)
       </div>
 
       {/* ================= スマホ用の 巨大タッチ領域 (ボタン) ================= */}
-      <div className="h-[155px] bg-slate-950 flex border-t border-white/20 select-none touch-none relative">
+      <div className="h-[90px] bg-slate-950 flex border-t border-white/20 select-none touch-none relative">
         
         {/* 左タッチエリア */}
         <div
@@ -1740,16 +1740,16 @@ function GameCanvas({ levels, selectedCar, onFinish, isMuted }: GameCanvasProps)
           onPointerCancel={(e) => { e.preventDefault(); handleTouchEnd(); }}
           className="flex-1 bg-slate-900 border-r border-slate-800 active:bg-slate-800 flex flex-col justify-center items-center transition-colors cursor-pointer"
         >
-          <div className="text-4xl text-slate-400 font-bold animate-pulse">👈</div>
-          <span className="text-[13px] text-slate-400 font-black mt-1">ひだりにうごく</span>
+          <div className="text-2xl text-slate-400 font-bold animate-pulse">👈</div>
+          <span className="text-[11px] text-slate-400 font-black mt-0.5">ひだりにうごく</span>
         </div>
 
         {/* 中央のミニメーター（おまけ） */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-slate-950 border-2 border-slate-800 flex flex-col justify-center items-center pointer-events-none">
-          <p className="text-[9px] text-slate-500 uppercase font-black tracking-tighter">speed</p>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-950 border border-slate-800 flex flex-col justify-center items-center pointer-events-none">
+          <p className="text-[7px] text-slate-500 uppercase font-black tracking-tighter">speed</p>
           <p 
             ref={speedTextRef}
-            className="text-xs font-mono font-black text-rose-500 animate-pulse"
+            className="text-[10px] font-mono font-black text-rose-500 animate-pulse -mt-0.5"
           >
             {`${Math.round(40 * SPEED_FACTOR)}km`}
           </p>
@@ -1763,8 +1763,8 @@ function GameCanvas({ levels, selectedCar, onFinish, isMuted }: GameCanvasProps)
           onPointerCancel={(e) => { e.preventDefault(); handleTouchEnd(); }}
           className="flex-1 bg-slate-900 active:bg-slate-800 flex flex-col justify-center items-center transition-colors cursor-pointer"
         >
-          <div className="text-4xl text-slate-400 font-bold animate-pulse">👉</div>
-          <span className="text-[13px] text-slate-400 font-black mt-1">みぎにうごく</span>
+          <div className="text-2xl text-slate-400 font-bold animate-pulse">👉</div>
+          <span className="text-[11px] text-slate-400 font-black mt-0.5">みぎにうごく</span>
         </div>
 
       </div>
