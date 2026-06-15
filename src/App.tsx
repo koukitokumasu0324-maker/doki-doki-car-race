@@ -759,7 +759,7 @@ export default function App() {
         {/* 3. リザルト（けっか）画面 */}
         {/* ========================================================= */}
         {gameState === "RESULT" && (
-          <div className="w-full h-full flex flex-col justify-between p-6 bg-slate-900 text-white overflow-hidden relative">
+          <div className="w-full h-full flex flex-col justify-between py-4 px-4 bg-slate-900 text-white overflow-hidden relative">
             
             {/* かみふぶきエフェクトのかざり */}
             {raceResult.success && (
@@ -782,41 +782,41 @@ export default function App() {
             )}
 
             {/* ヘッダー */}
-            <div className="text-center pt-6 relative z-10">
-              <span className="text-sm tracking-widest text-slate-400 uppercase font-black">レース おしまい！</span>
-              <h2 className="text-4xl font-extrabold mt-1 text-yellow-300">けっかはっぴょう！</h2>
+            <div className="text-center pt-2 relative z-10 shrink-0">
+              <span className="text-[11px] tracking-widest text-slate-400 uppercase font-black">レース おしまい！</span>
+              <h2 className="text-2xl font-extrabold mt-0.5 text-yellow-300">けっかはっぴょう！</h2>
             </div>
 
             {/* 結果カード */}
-            <div className="flex-1 my-6 flex flex-col justify-center items-center relative z-10">
+            <div className="flex-1 my-3 flex flex-col justify-center items-center relative z-10 min-h-0 overflow-y-auto pr-0.5">
               <AnimatePresence>
                 {raceResult.success ? (
                   /* 大成功ゴールゴールのカード */
                   <motion.div 
                     initial={{ scale: 0.3, rotate: -20, opacity: 0 }}
                     animate={{ scale: 1, rotate: 0, opacity: 1 }}
-                    className="bg-gradient-to-b from-yellow-400 to-amber-500 text-slate-950 p-6 rounded-3xl w-full border-4 border-white text-center shadow-[0_20px_50px_rgba(251,191,36,0.3)]"
+                    className="bg-gradient-to-b from-yellow-400 to-amber-500 text-slate-950 p-4 rounded-3xl w-full border-4 border-white text-center shadow-[0_20px_50px_rgba(251,191,36,0.3)]"
                   >
-                    <div className="text-6xl animate-bounce mb-2">🏆</div>
-                    <h3 className="text-3xl font-black mb-1">🏁ゴーーール！🏁</h3>
-                    <p className="text-xs font-bold text-slate-900 opacity-90">さいごまで はしりきったぞ！えらいね！</p>
+                    <div className="text-5xl animate-bounce mb-1">🏆</div>
+                    <h3 className="text-2xl font-black mb-0.5">🏁ゴーーール！🏁</h3>
+                    <p className="text-[10px] font-bold text-slate-900 opacity-90">さいごまで はしりきったぞ！えらいね！</p>
                     
-                    <div className="mt-4 bg-white/90 p-4 rounded-2xl flex flex-col gap-2 font-black border-2 border-slate-900">
-                      <div className="flex justify-between items-center text-sm border-b border-slate-300/60 pb-1.5">
+                    <div className="mt-2 bg-white/90 p-3 rounded-2xl flex flex-col gap-1.5 font-black border-2 border-slate-900">
+                      <div className="flex justify-between items-center text-xs border-b border-slate-300/60 pb-1">
                         <span className="text-slate-600">ゴールしたほうしゅう :</span>
                         <span className="text-green-600">🪙 {raceResult.reward}</span>
                       </div>
-                      <div className="flex justify-between items-center text-sm border-b border-slate-300/60 pb-1.5 border-dashed">
+                      <div className="flex justify-between items-center text-xs border-b border-slate-300/60 pb-1 border-dashed">
                         <span className="text-slate-600">みちで ひろったコイン :</span>
                         <span className="text-green-600">🪙 {raceResult.collected}</span>
                       </div>
-                      <div className="flex justify-between items-center text-sm border-b border-slate-300/60 pb-1.5 border-dashed">
+                      <div className="flex justify-between items-center text-xs border-b border-slate-300/60 pb-1 border-dashed">
                         <span className="text-slate-600">エンジンボーナス🚀 :</span>
                         <span className="text-green-600">🪙 {raceResult.bonus}</span>
                       </div>
-                      <div className="flex justify-between items-center text-lg text-slate-900 font-extrabold pt-1">
+                      <div className="flex justify-between items-center text-base text-slate-900 font-extrabold pt-0.5">
                         <span>ごーけい :</span>
-                        <span className="text-rose-600 text-2xl font-mono">
+                        <span className="text-rose-600 text-xl font-mono">
                           🪙 {raceResult.reward + raceResult.collected + raceResult.bonus}
                         </span>
                       </div>
@@ -827,30 +827,30 @@ export default function App() {
                   <motion.div 
                     initial={{ scale: 0.3, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className="bg-slate-800 text-white p-6 rounded-3xl w-full border-4 border-slate-700 text-center shadow-lg"
+                    className="bg-slate-800 text-white p-4 rounded-3xl w-full border-4 border-slate-700 text-center shadow-lg"
                   >
-                    <div className="text-6xl mb-2">💥🚀</div>
-                    <h3 className="text-2xl font-black text-red-400 mb-1">クラッシュしちゃった！</h3>
-                    <p className="text-xs text-slate-300">てきの車に ぶつかっちゃった。つぎは よけよう！</p>
+                    <div className="text-5xl mb-1">💥🚀</div>
+                    <h3 className="text-xl font-black text-red-400 mb-0.5">クラッシュしちゃった！</h3>
+                    <p className="text-[10px] text-slate-300">てきの車に ぶつかっちゃった。つぎは よけよう！</p>
                     
-                    <div className="mt-4 bg-slate-950/60 p-4 rounded-2xl flex flex-col gap-2 font-black border-2 border-slate-800">
-                      <div className="flex justify-between items-center text-sm border-b border-slate-800 pb-1.5">
+                    <div className="mt-2 bg-slate-950/60 p-3 rounded-2xl flex flex-col gap-1.5 font-black border-2 border-slate-800">
+                      <div className="flex justify-between items-center text-xs border-b border-slate-800 pb-1">
                         <span className="text-slate-400">がんばったしょう :</span>
                         <span className="text-yellow-300">🪙 {raceResult.reward}</span>
                       </div>
-                      <div className="flex justify-between items-center text-sm border-b border-slate-800 pb-1.5 border-dashed">
+                      <div className="flex justify-between items-center text-xs border-b border-slate-800 pb-1 border-dashed">
                         <span className="text-slate-400">みちで ひろったコイン :</span>
                         <span className="text-yellow-300">🪙 {raceResult.collected}</span>
                       </div>
-                      <div className="flex justify-between items-center text-base pt-1">
+                      <div className="flex justify-between items-center text-sm pt-0.5">
                         <span>ごーけい :</span>
-                        <span className="text-yellow-400 text-2xl font-mono">
+                        <span className="text-yellow-400 text-xl font-mono">
                           🪙 {raceResult.reward + raceResult.collected}
                         </span>
                       </div>
                     </div>
                     
-                    <p className="text-xs text-orange-400 font-bold mt-4 animate-pulse">
+                    <p className="text-[10px] text-orange-400 font-bold mt-2 animate-pulse">
                       💡タイヤやボディを パワーアップすると ぶつかりにくくなるぞ！
                     </p>
                   </motion.div>
@@ -859,18 +859,18 @@ export default function App() {
             </div>
 
             {/* 操作・ガレージへ戻るボタン */}
-            <div className="relative z-10 pt-4">
+            <div className="relative z-10 pt-2 shrink-0">
               <motion.button 
                 id="btn-return-garage"
                 onClick={() => {
                   sfx.playLevelUp();
                   setGameState("GARAGE");
                 }}
-                className="w-full py-4 bg-gradient-to-r from-yellow-400 to-amber-500 hover:brightness-110 active:scale-98 transition-transform font-black text-slate-950 text-lg rounded-2xl border-b-6 border-amber-700 shadow-xl flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-3 bg-gradient-to-r from-yellow-400 to-amber-500 hover:brightness-110 active:scale-98 transition-transform font-black text-slate-950 text-base rounded-xl border-b-4 border-amber-700 shadow-xl flex items-center justify-center gap-2 cursor-pointer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <ArrowLeft className="w-5 h-5 text-slate-950 stroke-[3px]" /> ガレージにもどってパワーアップ！🛠️
+                <ArrowLeft className="w-4 h-4 text-slate-950 stroke-[3px]" /> ガレージにもどってパワーアップ！🛠️
               </motion.button>
             </div>
 
